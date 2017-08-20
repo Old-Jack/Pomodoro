@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Pomodoro Timer By Florian </title>
+	  <link rel="stylesheet" type="text/css" href="pomodoro.css">
+</head>
+<body>
+<div class="container">
+
+<center><p id="minuteur"> 20:00 </p> </center>
+<center><div class="boutons">
+<button id="moins"> - </button>
+<button id="start"> START </button>
+<button id="reset"> RESET </button>
+<button id="stop"> STOP </button>
+<button id="restart"> RESTART </button>
+<button id="plus"> + </button>
+</div></center>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+
+<script>
+	$('#reset').toggle();
+	$("#restart").toggle();
+	var timer = 20;
+	var seconde = 0;
+	var etape = 0;
+
+	if (etape == 4){
+		timer=15
+		etape = 0
+	};
+$(document).ready(function(){
+
+	$("#start").click(function envoyer(){
+  $('#start').toggle()
+  $('#reset').toggle()
+		var time = setInterval(
+			function vingt(){
+				$("#minuteur").html(timer + ":" + seconde);
+				if (seconde == 0) {
+					timer--;
+					seconde = 59;
+					$("#minuteur").html(timer + ":" + seconde);
+				}else {
+					seconde--;
+					$("#minuteur").html(timer + ":" + seconde);
+				};
+				if (timer == 0 && seconde == 0){
+					clearInterval(time);
+					timer = 5;
+					$("#minuteur").html(timer + ":" + seconde);
+					var son = new Audio('reveil-mecanique.mp3');
+					etape ++;
+					son.play();
+
+					cinq();
+					
+				
+				};
+						if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+			},1000);
+
+			function cinq(){
+				etape+1;
+				timer = 4;
+				seconde = 59;
+				time = setInterval(
+					function(){
+			$("#minuteur").html(timer + ":" + seconde);
+			if (seconde == 0) {
+				timer--;
+				seconde = 59;
+				$("#minuteur").html(timer + ":" + seconde);
+			} else {
+				seconde--;
+				$("#minuteur").html(timer + ":" + seconde);
+			};
+			if (timer == 0 && seconde == 0){
+				clearInterval(time);
+				var son = new Audio('reveil-mecanique.mp3');
+					son.play();
+				timer = 20;
+				$("#minuteur").html(timer + ":" + seconde)
+				envoyer();
+			};
+					if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+
+		}, 1000);
+				};
+
+		$("#reset").click(function(){
+			timer= 20;
+			seconde = 0;
+			clearInterval(time);
+			$("#minuteur").html(timer + ":0" + seconde)
+			$('#reset').toggle()
+			  $('#start').toggle()
+		});
+
+		$("#stop").click(function(){
+			$('#stop').toggle()
+			  $('#restart').toggle()
+
+			clearInterval(time)
+			$("#minuteur").html(timer + ":" + seconde);
+				if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+		});
+		$("#restart").click(function(){
+						$('#stop').toggle()
+			  $('#restart').toggle()
+			time = setInterval(
+					function(){
+			$("#minuteur").html(timer + ":" + seconde);
+			if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				}
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				}
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+			if (seconde == 0) {
+				timer--;
+				seconde = 59;
+				$("#minuteur").html(timer + ":" + seconde);
+			} else {
+				seconde--;
+				$("#minuteur").html(timer + ":" + seconde);
+			};
+			if (timer == 0 && seconde == 0){
+				clearInterval(time);
+				var son = new Audio('reveil-mecanique.mp3');
+					son.play();
+				timer = 20;
+				$("#minuteur").html(timer + ":" + seconde)
+				etape ++;
+				vingt();
+			};
+					if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+
+		}, 1000);
+		});
+		});
+	$("#plus").click(function(){
+				$("#minuteur").html(timer + ":" + seconde);
+			timer ++;
+
+				if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+		})
+	$("#moins").click(function(){
+				$("#minuteur").html(timer + ":" + seconde);
+			timer --;
+
+				if (seconde < 10) {
+				$("#minuteur").html(timer + ":0" + seconde);
+				};
+				if (timer < 10) {
+				$("#minuteur").html("0" + timer + ":" + seconde);
+				};
+				if (timer < 10 && seconde < 10){
+					$("#minuteur").html("0" + timer + ":0" + seconde);
+				}
+				if (timer < 0) {
+					timer = 0;
+				}
+		})
+	});
+
+
+</script>
+
+</body>
+</html>
